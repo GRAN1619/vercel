@@ -38,7 +38,15 @@ async def clerk_auth_middleware(request: Request, call_next):
         return await call_next(request)
 
     # Define paths that should bypass authentication (e.g. login and favicon)
-    unprotected_paths = ["/login.html", "/favicon.ico"]
+    unprotected_paths = [
+        "/login.html",
+        "/favicon.ico",
+        "/_static/",
+        "/_images/",
+        "/_sources/",
+        "/search.html",
+        "/index.html",
+    ]
     if any(request.url.path.startswith(path) for path in unprotected_paths):
         return await call_next(request)
 
